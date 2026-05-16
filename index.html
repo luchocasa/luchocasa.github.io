@@ -4,775 +4,356 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luciano Casarrubia — Dev Portfolio</title>
+<meta name="description" content="Portfolio de Luciano Casarrubia, estudiante de Ingeniería en Sistemas en UTN Resistencia. Python, Flutter, JavaScript, SQL.">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0d1b2a;
-    --navy2: #152236;
-    --blue: #2E6DB4;
-    --blue-bright: #4A9EE8;
-    --cyan: #00d4ff;
-    --white: #f0f4f8;
-    --gray: #8899aa;
-    --card-bg: #111f30;
-    --border: rgba(74,158,232,0.18);
-    --accent: #00d4ff;
-  }
+:root {
+  --navy: #0d1b2a;
+  --navy2: #152236;
+  --blue: #2E6DB4;
+  --blue-bright: #4A9EE8;
+  --cyan: #00d4ff;
+  --white: #f0f4f8;
+  --gray: #8899aa;
+  --card-bg: #111f30;
+  --border: rgba(74,158,232,0.18);
+  --accent: #00d4ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(46,109,180,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,109,180,0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background: rgba(13,27,42,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--cyan); letter-spacing: 2px; }
+.nav-logo span { color: var(--white); }
+.nav-links { display: flex; gap: 36px; }
+.nav-links a {
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 2px;
+  color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--cyan); }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+  z-index: 1;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+.hero-tag {
+  font-family: 'Space Mono', monospace; font-size: 0.75rem;
+  color: var(--cyan); letter-spacing: 4px; margin-bottom: 20px;
+  opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+}
+h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800;
+  line-height: 1.0; margin-bottom: 8px;
+  opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
+}
+h1 .accent { color: var(--cyan); }
+.hero-sub {
+  font-size: 1.15rem; color: var(--gray); margin: 24px 0 40px;
+  line-height: 1.7; max-width: 520px;
+  opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+}
+.hero-btns {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.6s 0.65s forwards;
+}
+.btn {
+  padding: 13px 30px; border-radius: 4px;
+  font-family: 'Space Mono', monospace; font-size: 0.78rem;
+  letter-spacing: 1px; cursor: pointer; transition: all 0.2s;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary { background: var(--cyan); color: var(--navy); font-weight: 700; border: none; }
+.btn-primary:hover { background: #00b8e0; transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--cyan); border: 1px solid var(--cyan); }
+.btn-outline:hover { background: rgba(0,212,255,0.08); transform: translateY(-2px); }
 
-  html { scroll-behavior: smooth; }
+/* PHOTO CARD */
+.photo-card {
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.8s 0.8s forwards;
+}
+.photo-card::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--cyan), var(--blue), transparent);
+  z-index: -1;
+}
+.photo-card img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+  filter: brightness(0.95) contrast(1.05);
+  object-fit: cover;
+  aspect-ratio: 3/4;
+}
+.photo-status {
+  position: absolute; bottom: 20px; left: 20px;
+  background: rgba(13,27,42,0.92); border: 1px solid var(--border);
+  border-radius: 6px; padding: 10px 16px;
+  font-family: 'Space Mono', monospace; font-size: 0.7rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.dot-green { width: 8px; height: 8px; border-radius: 50%; background: #00ff88; animation: pulse 2s infinite; }
 
-  body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: 'Syne', sans-serif;
-    overflow-x: hidden;
-  }
+/* SOCIAL LINKS in hero */
+.hero-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.8s forwards;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  color: var(--gray);
+  text-decoration: none;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.social-link:hover { color: var(--cyan); border-color: var(--cyan); background: rgba(0,212,255,0.06); }
+.social-link svg { width: 14px; height: 14px; fill: currentColor; }
 
-  /* GRID BACKGROUND */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(46,109,180,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(46,109,180,0.07) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
+/* STATS BAR */
+.stats-bar {
+  position: relative; z-index: 1;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: center;
+}
+.stat-item {
+  flex: 1; max-width: 200px; text-align: center;
+  padding: 32px 20px; border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-number { font-size: 2.4rem; font-weight: 800; color: var(--cyan); line-height: 1; margin-bottom: 6px; }
+.stat-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 60px;
-    background: rgba(13,27,42,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 1rem;
-    color: var(--cyan);
-    letter-spacing: 2px;
-  }
-  .nav-logo span { color: var(--white); }
-  .nav-links { display: flex; gap: 36px; }
-  .nav-links a {
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: var(--gray);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--cyan); }
+section { position: relative; z-index: 1; }
+.section-inner { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
+.section-tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--cyan); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 60px;
+  position: relative; display: inline-block;
+}
+.section-title::after {
+  content: ''; position: absolute; bottom: -10px; left: 0;
+  width: 60px; height: 3px; background: var(--cyan); border-radius: 2px;
+}
 
-  /* ── HERO ── */
-  #hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 0 60px;
-    z-index: 1;
-  }
+/* SKILLS */
+#skills { background: var(--navy2); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.skill-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 10px; padding: 30px; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.skill-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: linear-gradient(90deg, var(--cyan), var(--blue));
+  opacity: 0; transition: opacity 0.3s;
+}
+.skill-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.35); }
+.skill-card:hover::before { opacity: 1; }
+.skill-icon { font-size: 2rem; margin-bottom: 16px; }
+.skill-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.skill-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; margin-bottom: 20px; }
+.skill-bar-wrap { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+.skill-bar { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--blue-bright)); border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+.skill-level { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--cyan); text-align: right; margin-top: 6px; letter-spacing: 1px; }
 
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 60px;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 80px;
-  }
+/* PORTFOLIO */
+#portfolio { background: var(--navy); }
+.portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; flex-wrap: wrap; gap: 20px; }
+.filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-tab {
+  font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 1px;
+  padding: 7px 16px; border-radius: 4px; border: 1px solid var(--border);
+  background: transparent; color: var(--gray); cursor: pointer; transition: all 0.2s;
+}
+.filter-tab.active, .filter-tab:hover { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 28px; }
+.project-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; transition: all 0.3s;
+  display: flex; flex-direction: column;
+}
+.project-card:hover { transform: translateY(-5px); border-color: rgba(0,212,255,0.4); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.project-thumb {
+  height: 180px; background: linear-gradient(135deg, #0d2240, #1a3a60);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem; position: relative; overflow: hidden;
+}
+.project-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,212,255,0.08), transparent); }
+.project-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.project-tag {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 1px;
+  padding: 3px 10px; border-radius: 3px;
+  background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2);
+}
+.project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.project-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.65; flex: 1; margin-bottom: 20px; }
+.project-footer { display: flex; gap: 10px; flex-wrap: wrap; }
+.proj-btn {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 1px;
+  padding: 7px 14px; border-radius: 4px; text-decoration: none;
+  border: 1px solid var(--border); color: var(--white); transition: all 0.2s;
+  background: transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+}
+.proj-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.proj-btn.primary { background: var(--blue); border-color: var(--blue); color: white; }
+.proj-btn.primary:hover { background: var(--blue-bright); border-color: var(--blue-bright); }
 
-  .hero-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--cyan);
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s forwards;
-  }
+/* COMING SOON CARD */
+.coming-soon-card {
+  background: transparent; border: 2px dashed rgba(0,212,255,0.25);
+  border-radius: 10px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  padding: 40px; min-height: 300px; text-align: center;
+}
+.coming-soon-icon { font-size: 2.5rem; opacity: 0.5; }
+.coming-soon-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 2px; color: var(--gray); text-transform: uppercase; }
+.coming-soon-sub { font-size: 0.78rem; color: var(--gray); opacity: 0.6; max-width: 180px; line-height: 1.5; }
 
-  h1 {
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.0;
-    margin-bottom: 8px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.35s forwards;
-  }
-  h1 .accent { color: var(--cyan); }
+/* ABOUT */
+#about { background: var(--navy2); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-text p { font-size: 0.95rem; color: var(--gray); line-height: 1.8; margin-bottom: 16px; }
+.about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.highlight-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+.highlight-item .hi-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 2px; color: var(--cyan); text-transform: uppercase; margin-bottom: 4px; }
+.highlight-item .hi-value { font-size: 0.9rem; font-weight: 600; }
+.about-photo-wrap { position: relative; }
+.about-photo-wrap img {
+  width: 100%; max-width: 360px; border-radius: 10px;
+  display: block; margin: 0 auto; object-fit: cover; aspect-ratio: 3/4;
+}
+.about-photo-wrap::before {
+  content: ''; position: absolute; width: 100%; height: 100%;
+  border: 2px solid var(--cyan); border-radius: 10px;
+  top: 16px; z-index: -1; max-width: 360px; left: calc(50% - 180px + 16px);
+}
 
-  .hero-sub {
-    font-size: 1.15rem;
-    color: var(--gray);
-    margin: 24px 0 40px;
-    line-height: 1.7;
-    max-width: 520px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.5s forwards;
-  }
+/* CONTACT */
+#contact { background: var(--navy); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-info p { color: var(--gray); line-height: 1.8; margin-bottom: 32px; font-size: 0.95rem; }
+.contact-items { display: flex; flex-direction: column; gap: 16px; }
+.contact-item { display: flex; align-items: center; gap: 16px; font-size: 0.9rem; text-decoration: none; }
+.contact-item-icon {
+  width: 42px; height: 42px; border-radius: 8px;
+  background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2);
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+}
+.contact-item-text { color: var(--gray); }
+.contact-item-text strong { display: block; color: var(--white); margin-bottom: 2px; font-size: 0.82rem; }
+.contact-item-text span { font-size: 0.85rem; }
+.contact-item:hover .contact-item-text { color: var(--cyan); }
 
-  .hero-btns {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.65s forwards;
-  }
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.form-label { display: block; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; color: var(--cyan); text-transform: uppercase; margin-bottom: 7px; }
+.form-input, .form-textarea {
+  width: 100%; background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 11px 14px; color: var(--white);
+  font-family: 'Syne', sans-serif; font-size: 0.9rem; transition: border-color 0.2s; outline: none;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--cyan); background: rgba(0,212,255,0.04); }
+.form-textarea { resize: vertical; min-height: 90px; }
+.form-group { margin-bottom: 4px; }
+.submit-btn {
+  width: 100%; padding: 14px; background: var(--cyan); color: var(--navy);
+  border: none; border-radius: 6px; font-family: 'Space Mono', monospace;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; transition: all 0.2s;
+}
+.submit-btn:hover { background: #00b8e0; transform: translateY(-2px); }
+.form-success {
+  display: none; text-align: center; padding: 20px;
+  color: #00ff88; font-family: 'Space Mono', monospace; font-size: 0.8rem;
+  border: 1px solid rgba(0,255,136,0.3); border-radius: 6px; background: rgba(0,255,136,0.05);
+}
 
-  .btn {
-    padding: 13px 30px;
-    border-radius: 4px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .btn-primary {
-    background: var(--cyan);
-    color: var(--navy);
-    font-weight: 700;
-    border: none;
-  }
-  .btn-primary:hover { background: #00b8e0; transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent;
-    color: var(--cyan);
-    border: 1px solid var(--cyan);
-  }
-  .btn-outline:hover { background: rgba(0,212,255,0.08); transform: translateY(-2px); }
+footer {
+  position: relative; z-index: 1; background: var(--card-bg);
+  border-top: 1px solid var(--border); text-align: center; padding: 32px;
+  font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--gray); letter-spacing: 1px;
+}
+footer span { color: var(--cyan); }
+footer a { color: var(--gray); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--cyan); }
 
-  /* PHOTO CARD */
-  .photo-card {
-    position: relative;
-    opacity: 0;
-    animation: fadeIn 0.8s 0.8s forwards;
-  }
-  .photo-card::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--cyan), var(--blue), transparent);
-    z-index: -1;
-  }
-  .photo-card img {
-    width: 100%;
-    border-radius: 10px;
-    display: block;
-    filter: brightness(0.95) contrast(1.05);
-  }
-  .photo-status {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(13,27,42,0.92);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .dot-green {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #00ff88;
-    animation: pulse 2s infinite;
-  }
+@keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.4); } 50% { box-shadow: 0 0 0 6px rgba(0,255,136,0); } }
 
-  /* ── STATS BAR ── */
-  .stats-bar {
-    position: relative;
-    z-index: 1;
-    background: var(--card-bg);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: center;
-    gap: 0;
-  }
-  .stat-item {
-    flex: 1;
-    max-width: 200px;
-    text-align: center;
-    padding: 32px 20px;
-    border-right: 1px solid var(--border);
-  }
-  .stat-item:last-child { border-right: none; }
-  .stat-number {
-    font-size: 2.4rem;
-    font-weight: 800;
-    color: var(--cyan);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .stat-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--gray);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── SECTIONS ── */
-  section { position: relative; z-index: 1; }
-
-  .section-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 100px 60px;
-  }
-
-  .section-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--cyan);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    margin-bottom: 60px;
-    position: relative;
-    display: inline-block;
-  }
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: var(--cyan);
-    border-radius: 2px;
-  }
-
-  /* ── SKILLS ── */
-  #skills { background: var(--navy2); }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-  }
-
-  .skill-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 30px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .skill-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--cyan), var(--blue));
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .skill-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.35); }
-  .skill-card:hover::before { opacity: 1; }
-
-  .skill-icon {
-    font-size: 2rem;
-    margin-bottom: 16px;
-  }
-  .skill-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .skill-desc {
-    font-size: 0.85rem;
-    color: var(--gray);
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .skill-bar-wrap {
-    height: 4px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .skill-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--cyan), var(--blue-bright));
-    border-radius: 2px;
-    width: 0;
-    transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
-  }
-  .skill-level {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--cyan);
-    text-align: right;
-    margin-top: 6px;
-    letter-spacing: 1px;
-  }
-
-  /* ── PORTAFOLIO ── */
-  #portfolio { background: var(--navy); }
-
-  .portfolio-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 50px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .filter-tabs {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .filter-tab {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 1px;
-    padding: 7px 16px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--gray);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .filter-tab.active, .filter-tab:hover {
-    background: var(--cyan);
-    color: var(--navy);
-    border-color: var(--cyan);
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-    gap: 28px;
-  }
-
-  .project-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: all 0.3s;
-    display: flex;
-    flex-direction: column;
-  }
-  .project-card:hover { transform: translateY(-5px); border-color: rgba(0,212,255,0.4); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-
-  .project-thumb {
-    height: 180px;
-    background: linear-gradient(135deg, #0d2240, #1a3a60);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-thumb::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0,212,255,0.08), transparent);
-  }
-
-  .project-body {
-    padding: 24px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .project-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 14px;
-  }
-  .project-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 1px;
-    padding: 3px 10px;
-    border-radius: 3px;
-    background: rgba(0,212,255,0.1);
-    color: var(--cyan);
-    border: 1px solid rgba(0,212,255,0.2);
-  }
-  .project-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .project-desc {
-    font-size: 0.85rem;
-    color: var(--gray);
-    line-height: 1.65;
-    flex: 1;
-    margin-bottom: 20px;
-  }
-  .project-footer {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .proj-btn {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    padding: 7px 14px;
-    border-radius: 4px;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    color: var(--white);
-    transition: all 0.2s;
-    background: transparent;
-    cursor: pointer;
-  }
-  .proj-btn:hover { border-color: var(--cyan); color: var(--cyan); }
-  .proj-btn.primary { background: var(--blue); border-color: var(--blue); color: white; }
-  .proj-btn.primary:hover { background: var(--blue-bright); border-color: var(--blue-bright); }
-
-  /* ADD PROJECT CARD */
-  .add-project-card {
-    background: transparent;
-    border: 2px dashed rgba(0,212,255,0.25);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    padding: 40px;
-    cursor: pointer;
-    transition: all 0.3s;
-    min-height: 300px;
-  }
-  .add-project-card:hover {
-    border-color: var(--cyan);
-    background: rgba(0,212,255,0.04);
-  }
-  .add-icon {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    border: 2px solid rgba(0,212,255,0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    color: var(--cyan);
-    transition: all 0.3s;
-  }
-  .add-project-card:hover .add-icon {
-    border-color: var(--cyan);
-    background: rgba(0,212,255,0.1);
-  }
-  .add-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    color: var(--gray);
-    text-transform: uppercase;
-  }
-
-  /* ── MODAL ── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    backdrop-filter: blur(4px);
-  }
-  .modal-overlay.open { display: flex; }
-
-  .modal {
-    background: var(--navy2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 40px;
-    width: 100%;
-    max-width: 560px;
-    position: relative;
-    animation: modalIn 0.3s ease;
-  }
-  @keyframes modalIn {
-    from { opacity:0; transform: scale(0.95) translateY(10px); }
-    to { opacity:1; transform: scale(1) translateY(0); }
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 16px; right: 20px;
-    background: none;
-    border: none;
-    color: var(--gray);
-    font-size: 1.4rem;
-    cursor: pointer;
-    line-height: 1;
-    transition: color 0.2s;
-  }
-  .modal-close:hover { color: var(--white); }
-
-  .modal h3 {
-    font-size: 1.4rem;
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
-  .modal-sub {
-    font-size: 0.82rem;
-    color: var(--gray);
-    margin-bottom: 28px;
-    font-family: 'Space Mono', monospace;
-  }
-
-  .form-group { margin-bottom: 18px; }
-  .form-label {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    color: var(--cyan);
-    text-transform: uppercase;
-    margin-bottom: 7px;
-  }
-  .form-input, .form-textarea, .form-select {
-    width: 100%;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 11px 14px;
-    color: var(--white);
-    font-family: 'Syne', sans-serif;
-    font-size: 0.9rem;
-    transition: border-color 0.2s;
-    outline: none;
-  }
-  .form-input:focus, .form-textarea:focus, .form-select:focus {
-    border-color: var(--cyan);
-    background: rgba(0,212,255,0.04);
-  }
-  .form-textarea { resize: vertical; min-height: 90px; }
-  .form-select option { background: var(--navy2); }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-  .modal-actions { display: flex; gap: 12px; margin-top: 28px; }
-
-  /* ── SOBRE MI ── */
-  #about { background: var(--navy2); }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .about-text p {
-    font-size: 0.95rem;
-    color: var(--gray);
-    line-height: 1.8;
-    margin-bottom: 16px;
-  }
-
-  .about-highlights {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 32px;
-  }
-  .highlight-item {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 18px;
-  }
-  .highlight-item .hi-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 2px;
-    color: var(--cyan);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .highlight-item .hi-value {
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-
-  .about-photo-wrap {
-    position: relative;
-  }
-  .about-photo-wrap img {
-    width: 100%;
-    max-width: 360px;
-    border-radius: 10px;
-    display: block;
-    margin: 0 auto;
-    filter: grayscale(15%);
-  }
-  .about-photo-wrap::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 2px solid var(--cyan);
-    border-radius: 10px;
-    top: 16px;
-    left: 16px;
-    z-index: -1;
-    max-width: 360px;
-    left: calc(50% - 180px + 16px);
-  }
-
-  /* ── CONTACTO ── */
-  #contact { background: var(--navy); }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .contact-info p {
-    color: var(--gray);
-    line-height: 1.8;
-    margin-bottom: 32px;
-    font-size: 0.95rem;
-  }
-
-  .contact-items { display: flex; flex-direction: column; gap: 16px; }
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-size: 0.9rem;
-  }
-  .contact-item-icon {
-    width: 42px; height: 42px;
-    border-radius: 8px;
-    background: rgba(0,212,255,0.1);
-    border: 1px solid rgba(0,212,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-  }
-  .contact-item-text { color: var(--gray); }
-  .contact-item-text strong { display: block; color: var(--white); margin-bottom: 2px; font-size: 0.82rem; }
-
-  .contact-form { display: flex; flex-direction: column; gap: 16px; }
-  .contact-form .form-input,
-  .contact-form .form-textarea {
-    background: rgba(255,255,255,0.03);
-  }
-  .submit-btn {
-    width: 100%;
-    padding: 14px;
-    background: var(--cyan);
-    color: var(--navy);
-    border: none;
-    border-radius: 6px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 4px;
-  }
-  .submit-btn:hover { background: #00b8e0; transform: translateY(-2px); }
-
-  /* ── FOOTER ── */
-  footer {
-    position: relative;
-    z-index: 1;
-    background: var(--card-bg);
-    border-top: 1px solid var(--border);
-    text-align: center;
-    padding: 32px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--gray);
-    letter-spacing: 1px;
-  }
-  footer span { color: var(--cyan); }
-
-  /* ── ANIMACIONES ── */
-  @keyframes fadeUp {
-    from { opacity:0; transform: translateY(24px); }
-    to { opacity:1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity:0; }
-    to { opacity:1; }
-  }
-  @keyframes pulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
-    50% { box-shadow: 0 0 0 6px rgba(0,255,136,0); }
-  }
-
-  /* SCROLL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { gap: 20px; }
-    #hero { padding: 0 24px; }
-    .hero-inner { grid-template-columns: 1fr; padding-top: 100px; }
-    .photo-card { max-width: 320px; margin: 0 auto; }
-    .section-inner { padding: 70px 24px; }
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-photo-wrap { order: -1; }
-    .form-row { grid-template-columns: 1fr; }
-    .stats-bar { flex-wrap: wrap; }
-    .stat-item { flex: 1; min-width: 120px; border-bottom: 1px solid var(--border); }
-  }
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { gap: 20px; }
+  #hero { padding: 0 24px; }
+  .hero-inner { grid-template-columns: 1fr; padding-top: 100px; }
+  .photo-card { max-width: 320px; margin: 0 auto; }
+  .section-inner { padding: 70px 24px; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-photo-wrap { order: -1; }
+  .stats-bar { flex-wrap: wrap; }
+  .stat-item { flex: 1; min-width: 120px; border-bottom: 1px solid var(--border); }
+}
 </style>
 </head>
 <body>
@@ -801,11 +382,25 @@
         <a href="#portfolio" class="btn btn-primary">Ver proyectos</a>
         <a href="#contact" class="btn btn-outline">Contactarme</a>
       </div>
+      <div class="hero-social">
+        <a href="https://www.linkedin.com/in/luciano-casarrubia-17406328a/" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/luchocasa" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+        <a href="mailto:lucianocasarrubiaa@gmail.com" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          Email
+        </a>
+      </div>
     </div>
+
     <div class="photo-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" 
-           alt="Luciano Casarrubia" 
-           id="heroPhoto"
+      <img src="profile.jpg"
+           alt="Luciano Casarrubia"
            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'380\' height=\'460\' viewBox=\'0 0 380 460\'><rect fill=\'%23152236\' width=\'380\' height=\'460\'/><text x=\'50%25\' y=\'50%25\' fill=\'%234A9EE8\' font-size=\'80\' text-anchor=\'middle\' dominant-baseline=\'middle\' font-family=\'Arial\'>LC</text></svg>'">
       <div class="photo-status">
         <div class="dot-green"></div>
@@ -879,7 +474,7 @@
       <div class="skill-card reveal" data-bar="90">
         <div class="skill-icon">📊</div>
         <div class="skill-name">Microsoft Office · Excel</div>
-        <div class="skill-desc">Excel avanzado: tablas dinámicas, fórmulas complejas, análisis de datos, reportes. Word y PowerPoint a nivel profesional.</div>
+        <div class="skill-desc">Excel avanzado: tablas dinámicas, fórmulas complejas, análisis de datos. Word y PowerPoint a nivel profesional.</div>
         <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
         <div class="skill-level">AVANZADO</div>
       </div>
@@ -905,8 +500,7 @@
     </div>
 
     <div class="projects-grid" id="projectsGrid">
-
-      <!-- Demo 1 -->
+      <!-- Proyecto 1 -->
       <div class="project-card reveal" data-category="python">
         <div class="project-thumb">🧮</div>
         <div class="project-body">
@@ -918,13 +512,15 @@
           <div class="project-title">Estructuras de Datos</div>
           <div class="project-desc">Implementación de árboles binarios, listas enlazadas, pilas y colas con visualización en consola. Proyecto universitario UTN.</div>
           <div class="project-footer">
-            <a href="#" class="proj-btn primary">Ver código</a>
-            <a href="#" class="proj-btn">Demo</a>
+            <a href="https://github.com/luchocasa" class="proj-btn primary" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              Ver en GitHub
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Demo 2 -->
+      <!-- Proyecto 2 -->
       <div class="project-card reveal" data-category="flutter">
         <div class="project-thumb">📱</div>
         <div class="project-body">
@@ -936,13 +532,15 @@
           <div class="project-title">App Móvil con API REST</div>
           <div class="project-desc">Aplicación móvil desarrollada en Flutter que consume una API construida con FastAPI en Python. CRUD completo.</div>
           <div class="project-footer">
-            <a href="#" class="proj-btn primary">Ver código</a>
-            <a href="#" class="proj-btn">Demo</a>
+            <a href="https://github.com/luchocasa" class="proj-btn primary" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              Ver en GitHub
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Demo 3 -->
+      <!-- Proyecto 3 -->
       <div class="project-card reveal" data-category="data">
         <div class="project-thumb">📊</div>
         <div class="project-body">
@@ -954,24 +552,25 @@
           <div class="project-title">Dashboard de Gestión</div>
           <div class="project-desc">Dashboard en Excel con tablas dinámicas, macros y conexión a SQL Server para análisis y visualización de datos.</div>
           <div class="project-footer">
-            <a href="#" class="proj-btn primary">Ver proyecto</a>
+            <a href="https://github.com/luchocasa" class="proj-btn primary" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              Ver en GitHub
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Add  -->
-      <div class="add-project-card reveal" onclick="openModal()">
-        <div class="add-icon">+</div>
-        <div class="add-label">Agregar proyecto</div>
-        <div style="font-size:0.78rem;color:var(--gray);text-align:center;max-width:180px;line-height:1.5;">
-          Subí tus propios proyectos al portfolio
-        </div>
+      <!-- Próximamente -->
+      <div class="coming-soon-card reveal">
+        <div class="coming-soon-icon">🚀</div>
+        <div class="coming-soon-label">Más proyectos</div>
+        <div class="coming-soon-sub">Próximamente — subiendo nuevos repos a GitHub</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SOBRE MI -->
+<!-- SOBRE MÍ -->
 <section id="about">
   <div class="section-inner">
     <div class="about-grid">
@@ -1001,8 +600,8 @@
         </div>
       </div>
       <div class="about-photo-wrap reveal">
-        <img src="" alt="Luciano Casarrubia" id="aboutPhoto"
-             onerror="this.style.display='none'">
+        <img src="profile.jpg" alt="Luciano Casarrubia"
+             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'360\' height=\'480\' viewBox=\'0 0 360 480\'><rect fill=\'%23152236\' width=\'360\' height=\'480\'/><text x=\'50%25\' y=\'50%25\' fill=\'%234A9EE8\' font-size=\'80\' text-anchor=\'middle\' dominant-baseline=\'middle\' font-family=\'Arial\'>LC</text></svg>'">
       </div>
     </div>
   </div>
@@ -1015,37 +614,51 @@
       <div class="contact-info">
         <p class="section-tag reveal">// Contacto</p>
         <h2 class="section-title reveal">Hablemos</h2>
-        <p class="reveal">Estoy buscando mi primera experiencia laboral formal. Si tenés una oportunidad o querés hablar sobre algún proyecto, no dudes en escribirme.</p>
-        <div class="contact-items reveal">
-          <div class="contact-item">
-            <div class="contact-item-icon">📧</div>
+        <p class="reveal">Estoy buscando mi primera experiencia profesional. Si tenés una oportunidad o simplemente querés charlar sobre tecnología, no dudes en escribirme.</p>
+        <div class="contact-items">
+          <a href="mailto:lucianocasarrubiaa@gmail.com" class="contact-item reveal">
+            <div class="contact-item-icon">✉️</div>
             <div class="contact-item-text">
               <strong>Email</strong>
-              lucianocasarrubiaa@gmail.com
+              <span>lucianocasarrubiaa@gmail.com</span>
             </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">📞</div>
+          </a>
+          <a href="https://www.linkedin.com/in/luciano-casarrubia-17406328a/" target="_blank" class="contact-item reveal">
+            <div class="contact-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#4A9EE8"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
             <div class="contact-item-text">
-              <strong>Teléfono / WhatsApp</strong>
-              +54 3773 525585
+              <strong>LinkedIn</strong>
+              <span>luciano-casarrubia</span>
             </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">📍</div>
+          </a>
+          <a href="https://github.com/luchocasa" target="_blank" class="contact-item reveal">
+            <div class="contact-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#4A9EE8"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
             <div class="contact-item-text">
-              <strong>Ubicación</strong>
-              Resistencia, Chaco, Argentina
+              <strong>GitHub</strong>
+              <span>github.com/luchocasa</span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
+
       <div class="contact-form reveal">
-        <input type="text" class="form-input" placeholder="Tu nombre">
-        <input type="email" class="form-input" placeholder="Tu email">
-        <input type="text" class="form-input" placeholder="Asunto">
-        <textarea class="form-textarea" placeholder="Tu mensaje..." rows="5"></textarea>
-        <button class="submit-btn" onclick="handleContact(this)">ENVIAR MENSAJE</button>
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-input" id="contactName" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="contactEmail" placeholder="tu@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mensaje</label>
+          <textarea class="form-textarea" id="contactMsg" placeholder="¿En qué puedo ayudarte?"></textarea>
+        </div>
+        <button class="submit-btn" onclick="sendEmail()">ENVIAR MENSAJE</button>
+        <div class="form-success" id="formSuccess">✓ Gracias por tu mensaje. Te respondo pronto!</div>
       </div>
     </div>
   </div>
@@ -1053,188 +666,51 @@
 
 <!-- FOOTER -->
 <footer>
-  Diseñado y desarrollado por <span>Luciano Casarrubia</span> · 2026 · Resistencia, Chaco
+  <p>Desarrollado por <span>Luciano Casarrubia</span> · 
+    <a href="mailto:lucianocasarrubiaa@gmail.com">lucianocasarrubiaa@gmail.com</a> · 
+    <a href="https://www.linkedin.com/in/luciano-casarrubia-17406328a/" target="_blank">LinkedIn</a> · 
+    <a href="https://github.com/luchocasa" target="_blank">GitHub</a>
+  </p>
 </footer>
 
-<!-- AÑADIR PROYECTO MODAL -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <h3>Nuevo proyecto</h3>
-    <p class="modal-sub">// Completá los datos de tu proyecto</p>
-    <div class="form-group">
-      <label class="form-label">Nombre del proyecto</label>
-      <input type="text" class="form-input" id="projName" placeholder="Mi aplicación en Flutter">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Descripción</label>
-      <textarea class="form-textarea" id="projDesc" placeholder="Describí qué hace el proyecto..."></textarea>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Categoría</label>
-        <select class="form-select" id="projCat">
-          <option value="python">Python</option>
-          <option value="flutter">Flutter</option>
-          <option value="web">Web</option>
-          <option value="data">Datos / Excel</option>
-          <option value="other">Otro</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Ícono (emoji)</label>
-        <input type="text" class="form-input" id="projIcon" placeholder="🚀" maxlength="4">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tecnologías (separadas por coma)</label>
-      <input type="text" class="form-input" id="projTags" placeholder="Python, FastAPI, SQLite">
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Link GitHub (opcional)</label>
-        <input type="url" class="form-input" id="projGithub" placeholder="https://github.com/...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Link Demo (opcional)</label>
-        <input type="url" class="form-input" id="projDemo" placeholder="https://...">
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-primary" onclick="addProject()" style="flex:1">Agregar al portfolio</button>
-      <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
-    </div>
-  </div>
-</div>
-
 <script>
-  // ── foto de perfil ──
-  (function() {
-    const heroPhoto = document.getElementById('heroPhoto');
-    const aboutPhoto = document.getElementById('aboutPhoto');
-    // Use a placeholder that matches the design
-    const placeholder = `data:image/svg+xml;utf8,<svg xmlns='Portafolio+//img//LC.jpeg' width='380' height='460' viewBox='0 0 380 460'><rect fill='%23152236' width='380' height='460' rx='10'/><circle cx='190' cy='160' r='80' fill='%231B2A4A'/><rect x='80' y='270' width='220' height='160' rx='15' fill='%231B2A4A'/><text x='50%25' y='46%25' fill='%234A9EE8' font-size='48' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold'>LC</text></svg>`;
-    heroPhoto.src = placeholder;
-    aboutPhoto.src = placeholder;
-    aboutPhoto.style.display = 'block';
-  })();
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ── Scroll reveal ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // ── habilidades bars ──
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const card = entry.target;
-        const bar = card.querySelector('.skill-bar');
-        const pct = card.dataset.bar || 70;
-        setTimeout(() => { bar.style.width = pct + '%'; }, 300);
-        barObserver.unobserve(card);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  document.querySelectorAll('.skill-card').forEach(c => barObserver.observe(c));
-
-  // ── Filter ──
-  function filterProjects(cat, btn) {
-    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.project-card').forEach(card => {
-      const show = cat === 'all' || card.dataset.category === cat;
-      card.style.display = show ? 'flex' : 'none';
-    });
-  }
-
-  // ── Modal ──
-  function openModal() {
-    document.getElementById('modalOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    document.getElementById('modalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-    ['projName','projDesc','projTags','projGithub','projDemo'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    document.getElementById('projIcon').value = '';
-  }
-
-  // Close on overlay click
-  document.getElementById('modalOverlay').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-
-  // ── Añadir proyecto ──
-  function addProject() {
-    const name = document.getElementById('projName').value.trim();
-    const desc = document.getElementById('projDesc').value.trim();
-    const cat = document.getElementById('projCat').value;
-    const icon = document.getElementById('projIcon').value.trim() || '🚀';
-    const tagsRaw = document.getElementById('projTags').value.trim();
-    const github = document.getElementById('projGithub').value.trim();
-    const demo = document.getElementById('projDemo').value.trim();
-
-    if (!name || !desc) {
-      alert('Por favor completá al menos el nombre y la descripción.');
-      return;
+// Skill bars
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const bar = e.target.querySelector('.skill-bar');
+      if (bar) bar.style.width = e.target.dataset.bar + '%';
     }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skill-card').forEach(el => skillObserver.observe(el));
 
-    const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : [];
+// Filter projects
+function filterProjects(cat, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.category === cat) ? 'flex' : 'none';
+  });
+}
 
-    const card = document.createElement('div');
-    card.className = 'project-card reveal visible';
-    card.dataset.category = cat;
-
-    card.innerHTML = `
-      <div class="project-thumb">${icon}</div>
-      <div class="project-body">
-        <div class="project-tags">
-          ${tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
-        </div>
-        <div class="project-title">${name}</div>
-        <div class="project-desc">${desc}</div>
-        <div class="project-footer">
-          ${github ? `<a href="${github}" target="_blank" class="proj-btn primary">Ver código</a>` : ''}
-          ${demo ? `<a href="${demo}" target="_blank" class="proj-btn">Demo</a>` : ''}
-          ${!github && !demo ? '<span style="font-size:0.75rem;color:var(--gray);font-family:Space Mono,monospace;">Sin links aún</span>' : ''}
-        </div>
-      </div>
-    `;
-
-    // Insert before the add-card
-    const addCard = document.querySelector('.add-project-card');
-    addCard.parentNode.insertBefore(card, addCard);
-
-    closeModal();
-
-    // Scroll to new card
-    setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
-  }
-
-  // ── Contacto ──
-  function handleContact(btn) {
-    const original = btn.textContent;
-    btn.textContent = '✓ MENSAJE ENVIADO';
-    btn.style.background = '#00cc77';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.background = '';
-      btn.disabled = false;
-    }, 3000);
-  }
+// Contact form → mailto
+function sendEmail() {
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const msg = document.getElementById('contactMsg').value.trim();
+  if (!name || !email || !msg) { alert('Por favor completá todos los campos.'); return; }
+  const subject = encodeURIComponent('Contacto desde portfolio — ' + name);
+  const body = encodeURIComponent('Hola Luciano,\n\n' + msg + '\n\nSaludos,\n' + name + '\n' + email);
+  window.location.href = 'mailto:lucianocasarrubiaa@gmail.com?subject=' + subject + '&body=' + body;
+  document.getElementById('formSuccess').style.display = 'block';
+}
 </script>
 </body>
 </html>
