@@ -39,10 +39,6 @@ luchocasa.github.io/
 ---
 
 ## ✨ Características del portfolio
-
-- Diseño **dark mode** con paleta navy/cyan
-- Animaciones de entrada con `IntersectionObserver`
-- Barras de habilidades animadas al hacer scroll
 - Filtrado de proyectos por categoría
 - Sección de contacto con formulario funcional
 - Totalmente **responsive** para mobile y desktop
@@ -50,8 +46,7 @@ luchocasa.github.io/
 ---
 
 ## 📬 Contacto
-
-Estoy buscando mi primera experiencia profesional. Si tenés una propuesta o querés charlar, escribime:
+Si tenés una propuesta o querés charlar, escribime:
 
 - **Email:** [lucianocasarrubiaa@gmail.com](mailto:lucianocasarrubiaa@gmail.com)
 - **LinkedIn:** [linkedin.com/in/luciano-casarrubia-17406328a](https://www.linkedin.com/in/luciano-casarrubia-17406328a/)
