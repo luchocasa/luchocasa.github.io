@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luciano Casarrubia — Dev Portfolio</title>
-<meta name="description" content="Portfolio de Luciano Casarrubia, estudiante de Ingeniería en Sistemas en UTN Resistencia. Python, Flutter, JavaScript, SQL.">
+<meta name="description" content="Portfolio de Luciano Casarrubia, estudiante de Ingeniería en Sistemas en UTN Resistencia. Desarrollador Python Junior: FastAPI, SQLite, Pandas, JavaScript, C++ y SQL.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -305,6 +305,17 @@ section { position: relative; z-index: 1; }
 .about-photo-wrap { position: relative; }
 .about-photo-wrap img { width: 100%; max-width: 360px; display: block; margin: 0 auto; object-fit: cover; aspect-ratio: 3/4; border: 1px solid var(--border); }
 
+/* EXPERIENCIA Y FORMACIÓN */
+#experience { background: var(--gray-50); }
+.timeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.timeline-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.5px; }
+.timeline-item { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--nasa-blue-bright); border-radius: 2px; padding: 24px 26px; margin-bottom: 18px; }
+.timeline-item .tl-date { font-size: 0.65rem; font-weight: 800; letter-spacing: 1.5px; color: var(--nasa-red); text-transform: uppercase; margin-bottom: 6px; }
+.timeline-item .tl-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+.timeline-item .tl-place { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 12px; }
+.timeline-item ul { padding-left: 18px; }
+.timeline-item li, .timeline-item p { font-size: 0.85rem; color: var(--gray-700); line-height: 1.65; margin-bottom: 4px; }
+
 /* CONTACT */
 #contact { background: var(--gray-50); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
@@ -367,7 +378,8 @@ footer a:hover { color: var(--nasa-red); }
   .hero-inner { grid-template-columns: 1fr; padding-top: 100px; }
   .photo-card { max-width: 320px; margin: 0 auto; }
   .section-inner { padding: 70px 24px; }
-  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-grid, .contact-grid, .timeline-grid { grid-template-columns: 1fr; gap: 40px; }
+  .nav-links { display: none; }
   .about-photo-wrap { order: -1; }
   .stats-bar { flex-wrap: wrap; }
   .stat-item { flex: 1; min-width: 120px; border-bottom: 1px solid var(--border); }
@@ -385,6 +397,7 @@ footer a:hover { color: var(--nasa-red); }
   <div class="nav-links">
     <a href="#skills">Skills</a>
     <a href="#portfolio">Portfolio</a>
+    <a href="#experience">Experiencia</a>
     <a href="#about">Sobre mí</a>
     <a href="#contact">Contacto</a>
   </div>
@@ -394,10 +407,10 @@ footer a:hover { color: var(--nasa-red); }
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-content">
-      <p class="hero-tag">Disponible para trabajar</p>
+      <p class="hero-tag">Desarrollador Python Junior · Disponible para trabajar</p>
       <h1>Luciano<br><span class="accent">Casarrubia</span></h1>
       <p class="hero-sub">
-        Estudiante de Ingeniería en Sistemas en UTN Resistencia. Desarrollo aplicaciones con Python, Flutter y JavaScript, y manejo Excel de manera avanzada. Busco mi primera experiencia profesional para seguir creciendo.
+        Estudiante de Ingeniería en Sistemas de Información en UTN FRRe. Desarrollo APIs REST con Python, FastAPI y SQLite, manejo datos con Pandas y construyo interfaces con HTML, CSS y JavaScript. Combino conocimientos técnicos con experiencia en atención al cliente.
       </p>
       <div class="hero-btns">
         <a href="#portfolio" class="btn btn-primary">Ver proyectos</a>
@@ -426,7 +439,7 @@ footer a:hover { color: var(--nasa-red); }
            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'380\' height=\'460\' viewBox=\'0 0 380 460\'><rect fill=\'%230a0a0c\' width=\'380\' height=\'460\'/><text x=\'50%25\' y=\'50%25\' fill=\'%232f6fe0\' font-size=\'80\' text-anchor=\'middle\' dominant-baseline=\'middle\' font-family=\'Arial\'>LC</text></svg>'">
       <div class="photo-status">
         <div class="dot-green"></div>
-        Open to work · Full time / Part time
+        Open to work · Full / Part time · Remoto
       </div>
     </div>
   </div>
@@ -435,20 +448,20 @@ footer a:hover { color: var(--nasa-red); }
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item reveal">
-    <div class="stat-number">2°</div>
-    <div class="stat-label">Año UTN</div>
+    <div class="stat-number">3</div>
+    <div class="stat-label">Proyectos</div>
   </div>
   <div class="stat-item reveal">
-    <div class="stat-number">5+</div>
+    <div class="stat-number">10+</div>
     <div class="stat-label">Tecnologías</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-number">6m</div>
+    <div class="stat-label">Atención al cliente</div>
   </div>
   <div class="stat-item reveal">
     <div class="stat-number">B1</div>
     <div class="stat-label">Inglés técnico</div>
-  </div>
-  <div class="stat-item reveal">
-    <div class="stat-number">∞</div>
-    <div class="stat-label">Ganas de aprender</div>
   </div>
 </div>
 
@@ -461,42 +474,56 @@ footer a:hover { color: var(--nasa-red); }
       <div class="skill-card reveal" data-bar="82">
         <div class="skill-icon">🐍</div>
         <div class="skill-name">Python · FastAPI</div>
-        <div class="skill-desc">Desarrollo de scripts, algoritmos, estructuras de datos y APIs REST con FastAPI.</div>
+        <div class="skill-desc">APIs REST con FastAPI y Uvicorn, validación de datos con Pydantic y persistencia en SQLite.</div>
         <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
         <div class="skill-level">Avanzado</div>
       </div>
       <div class="skill-card reveal" data-bar="75">
-        <div class="skill-icon">📱</div>
-        <div class="skill-name">Flutter · Dart</div>
-        <div class="skill-desc">Desarrollo de aplicaciones móviles multiplataforma con Flutter.</div>
+        <div class="skill-icon">🐼</div>
+        <div class="skill-name">Pandas · OpenPyXL</div>
+        <div class="skill-desc">Manejo y análisis de datos con Pandas y exportación a archivos Excel con OpenPyXL.</div>
         <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
         <div class="skill-level">Intermedio-Avanzado</div>
       </div>
       <div class="skill-card reveal" data-bar="70">
         <div class="skill-icon">🌐</div>
         <div class="skill-name">JavaScript · HTML · CSS</div>
-        <div class="skill-desc">Desarrollo frontend web, interfaces dinámicas y manipulación del DOM.</div>
+        <div class="skill-desc">Interfaces web que consumen APIs, con filtrado dinámico y renderizado de componentes.</div>
         <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
         <div class="skill-level">Intermedio-Avanzado</div>
       </div>
       <div class="skill-card reveal" data-bar="68">
         <div class="skill-icon">⚙️</div>
         <div class="skill-name">C++</div>
-        <div class="skill-desc">Algoritmos, estructuras de datos, programación de bajo nivel y proyectos universitarios.</div>
+        <div class="skill-desc">Algoritmos y estructuras de datos aplicados en proyectos universitarios.</div>
         <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
         <div class="skill-level">Intermedio</div>
       </div>
       <div class="skill-card reveal" data-bar="78">
         <div class="skill-icon">🗄️</div>
-        <div class="skill-name">SQL Server</div>
-        <div class="skill-desc">Diseño de bases de datos relacionales, consultas SQL, procedimientos almacenados.</div>
+        <div class="skill-name">SQL · SQLite · SQL Server</div>
+        <div class="skill-desc">Bases de datos relacionales y consultas SQL con SQLite y SQL Server.</div>
         <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
         <div class="skill-level">Intermedio-Avanzado</div>
       </div>
       <div class="skill-card reveal" data-bar="90">
         <div class="skill-icon">📊</div>
         <div class="skill-name">Microsoft Office · Excel</div>
-        <div class="skill-desc">Excel avanzado: tablas dinámicas, fórmulas complejas, análisis de datos. Word y PowerPoint a nivel profesional.</div>
+        <div class="skill-desc">Excel: tablas dinámicas, BUSCARV, ÍNDICE/COINCIDIR. Word y PowerPoint.</div>
+        <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        <div class="skill-level">Avanzado</div>
+      </div>
+      <div class="skill-card reveal" data-bar="75">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-name">Git · GitHub · VS Code</div>
+        <div class="skill-desc">Control de versiones, publicación de proyectos y documentación en GitHub.</div>
+        <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        <div class="skill-level">Intermedio-Avanzado</div>
+      </div>
+      <div class="skill-card reveal" data-bar="85">
+        <div class="skill-icon">🤝</div>
+        <div class="skill-name">Atención al cliente</div>
+        <div class="skill-desc">Comunicación clara, escucha activa, asesoramiento de productos, trato cordial y resolución de problemas.</div>
         <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
         <div class="skill-level">Avanzado</div>
       </div>
@@ -515,51 +542,47 @@ footer a:hover { color: var(--nasa-red); }
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="filterProjects('all', this)">Todos</button>
         <button class="filter-tab" onclick="filterProjects('python', this)">Python</button>
-        <button class="filter-tab" onclick="filterProjects('flutter', this)">Flutter</button>
         <button class="filter-tab" onclick="filterProjects('web', this)">Web</button>
-        <button class="filter-tab" onclick="filterProjects('data', this)">Datos</button>
       </div>
     </div>
 
     <div class="projects-grid" id="projectsGrid">
       <!-- Proyecto 1 -->
-       <div class="project-card reveal" data-category="python">
-  <div class="project-thumb">💸</div>
-  <div class="project-body">
-    <div class="project-tags">
-      <span class="project-tag">Python</span>
-      <span class="project-tag">FastAPI</span>
-      <span class="project-tag">SQLite</span>
-      <span class="project-tag">Pandas</span>
-      <span class="project-tag">JavaScript</span>
-    </div>
-    <div class="project-title">Control de Gastos</div>
-    <div class="project-desc">
-      App web para registrar y visualizar ingresos y gastos. 
-      Backend con FastAPI y SQLite, análisis de datos con Pandas 
-      y frontend interactivo en JavaScript.
-    </div>
-    <div class="project-footer">
-      <a href="https://github.com/luchocasa/control-gastos-fastapi" class="proj-btn primary" target="_blank">
-        Ver en GitHub
-      </a>
-    </div>
-  </div>
-</div>
-
-      <!-- Proyecto 2 -->
-      <div class="project-card reveal" data-category="flutter">
-        <div class="project-thumb">📱</div>
+      <div class="project-card reveal" data-category="python">
+        <div class="project-thumb">💸</div>
         <div class="project-body">
           <div class="project-tags">
-            <span class="project-tag">Flutter</span>
-            <span class="project-tag">FastAPI</span>
             <span class="project-tag">Python</span>
+            <span class="project-tag">FastAPI</span>
+            <span class="project-tag">SQLite</span>
+            <span class="project-tag">Pandas</span>
+            <span class="project-tag">JavaScript</span>
           </div>
-          <div class="project-title">App Móvil con API REST</div>
-          <div class="project-desc">Aplicación móvil desarrollada en Flutter que consume una API construida con FastAPI en Python. CRUD completo.</div>
+          <div class="project-title">Control de Gastos</div>
+          <div class="project-desc">
+            API REST con FastAPI y Uvicorn, validación con Pydantic y persistencia en SQLite. Exportación de datos a Excel con Pandas y OpenPyXL, y frontend en HTML, CSS y JavaScript que consume la API con filtrado dinámico. Incluye documentación OpenAPI/Swagger automática.
+          </div>
           <div class="project-footer">
-            <a href="https://github.com/luchocasa" class="proj-btn primary" target="_blank">
+            <a href="https://github.com/luchocasa/control-gastos-fastapi" class="proj-btn primary" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              Ver en GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto 2 -->
+      <div class="project-card reveal" data-category="web">
+        <div class="project-thumb">🛒</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">HTML/CSS</span>
+          </div>
+          <div class="project-title">Tienda E-commerce (demo)</div>
+          <div class="project-desc">Tienda online de demostración desarrollada con JavaScript, HTML y CSS para mi portafolio.</div>
+          <div class="project-footer">
+            <a href="https://github.com/luchocasa/E-Comerce-demo" class="proj-btn primary" target="_blank">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
               Ver en GitHub
             </a>
@@ -568,25 +591,62 @@ footer a:hover { color: var(--nasa-red); }
       </div>
 
       <!-- Proyecto 3 -->
-      <div class="project-card reveal" data-category="data">
-        <div class="project-thumb">📊</div>
+      <div class="project-card reveal" data-category="web">
+        <div class="project-thumb">🚀</div>
         <div class="project-body">
           <div class="project-tags">
-            <span class="project-tag">Excel</span>
-            <span class="project-tag">SQL Server</span>
-            <span class="project-tag">Datos</span>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JavaScript</span>
           </div>
-          <div class="project-title">Dashboard de Gestión</div>
-          <div class="project-desc">Dashboard en Excel con tablas dinámicas, macros y conexión a SQL Server para análisis y visualización de datos.</div>
+          <div class="project-title">Portafolio personal</div>
+          <div class="project-desc">Este sitio: reúne mis proyectos y tecnologías, publicado en GitHub Pages.</div>
           <div class="project-footer">
-            <a href="https://github.com/luchocasa" class="proj-btn primary" target="_blank">
+            <a href="https://github.com/luchocasa/luchocasa.github.io" class="proj-btn primary" target="_blank">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
               Ver en GitHub
             </a>
           </div>
         </div>
       </div>
-     
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA Y FORMACIÓN -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-tag reveal">Trayectoria</p>
+    <h2 class="section-title reveal">Experiencia y formación</h2>
+    <div class="timeline-grid">
+      <div>
+        <div class="timeline-col-title reveal">Experiencia laboral</div>
+        <div class="timeline-item reveal">
+          <div class="tl-date">6 meses</div>
+          <div class="tl-title">Atención en caja y reposición de stock</div>
+          <div class="tl-place">Ferretería Sergio</div>
+          <ul>
+            <li>Atención al cliente en caja: cobro, trato directo con el público y resolución de consultas.</li>
+            <li>Reposición y control de stock de mercadería, manteniendo los productos ordenados y disponibles.</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="timeline-col-title reveal">Formación</div>
+        <div class="timeline-item reveal">
+          <div class="tl-date">03/2022 – Actualidad</div>
+          <div class="tl-title">Ingeniería en Sistemas de Información</div>
+          <div class="tl-place">Universidad Tecnológica Nacional, Facultad Regional Resistencia</div>
+          <p>Materias destacadas: Algoritmos y Estructuras de Datos, Bases de Datos, Paradigmas de Programación.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="tl-date">2015 – 2021</div>
+          <div class="tl-title">Bachiller en Economía y Administración</div>
+          <div class="tl-place">Educación secundaria</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- SOBRE MÍ -->
@@ -597,8 +657,8 @@ footer a:hover { color: var(--nasa-red); }
         <p class="section-tag reveal">Sobre mí</p>
         <h2 class="section-title reveal">Quién soy</h2>
         <p class="reveal">Soy Luciano, tengo 23 años y vivo en Resistencia, Chaco. Actualmente estoy cursando el tercer año de Ingeniería en Sistemas de Información en la UTN Facultad Regional Resistencia.</p>
-        <p class="reveal">Me apasiona construir cosas con código — desde aplicaciones móviles hasta APIs y análisis de datos. Siempre busco aprender nuevas tecnologías y mejorar mis habilidades existentes.</p>
-        <p class="reveal">Cuento con manejo avanzado de Microsoft Office, especialmente Excel, lo que me permite trabajar tanto en roles técnicos como en entornos administrativos y de gestión.</p>
+        <p class="reveal">Desarrollo APIs REST con Python, FastAPI y SQLite, manejo datos con Pandas y construyo interfaces con HTML, CSS y JavaScript. También programo algoritmos y estructuras de datos en C++.</p>
+        <p class="reveal">Tengo experiencia en atención al cliente y caja en ferretería, donde combiné escucha activa, comunicación clara y resolución de consultas. Busco incorporarme a un equipo de desarrollo backend o a un puesto con atención al cliente para aportar y seguir creciendo.</p>
         <div class="about-highlights reveal">
           <div class="highlight-item">
             <div class="hi-label">Ubicación</div>
@@ -610,7 +670,7 @@ footer a:hover { color: var(--nasa-red); }
           </div>
           <div class="highlight-item">
             <div class="hi-label">Modalidad</div>
-            <div class="hi-value">Remoto · Presencial</div>
+            <div class="hi-value">Remoto · Vehículo propio</div>
           </div>
           <div class="highlight-item">
             <div class="hi-label">Inglés</div>
@@ -641,6 +701,13 @@ footer a:hover { color: var(--nasa-red); }
             <div class="contact-item-text">
               <strong>Email</strong>
               <span>lucianocasarrubiaa@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+543773525585" class="contact-item reveal">
+            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-text">
+              <strong>Teléfono</strong>
+              <span>+54 3773 525585</span>
             </div>
           </a>
           <a href="https://www.linkedin.com/in/luciano-casarrubia-17406328a/" target="_blank" class="contact-item reveal">
